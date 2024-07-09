@@ -4,17 +4,17 @@ public class MainWithFiveTasks {
     public static void main(String[] args) {
         System.out.println("Hello world!");
 
-        ThreadPoolExecutor executor1 = new ThreadPoolExecutor(2,4,1,
-                TimeUnit.MINUTES,new ArrayBlockingQueue<>(2), new customThreadFactory(), new customRejectionPolicy());
+        ThreadPoolExecutor executor1 = new ThreadPoolExecutor(2, 4, 1,
+                TimeUnit.MINUTES, new ArrayBlockingQueue<>(2), new customThreadFactory(), new customRejectionPolicy());
 
-        for(int i=0;i<5;i++){
-            executor1.submit(()->{
+        for (int i = 0; i < 5; i++) {
+            executor1.submit(() -> {
                 try {
                     Thread.sleep(5000);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-                System.out.println("task is processed by :"+Thread.currentThread().getName());
+                System.out.println("task is processed by :" + Thread.currentThread().getName());
             });
         }
 
@@ -34,17 +34,17 @@ public class MainWithFiveTasks {
         * when 5th task comes in as threads and busy and Queue is full, maxPoolSize is checked, it is 4 and threadPoolSize is 2 currently so new thread 'thread-2' is created
         */
 
-        ThreadPoolExecutor executor = new ThreadPoolExecutor(2,4,1,
-                TimeUnit.MINUTES,new ArrayBlockingQueue<>(2), new customThreadFactory(), new customRejectionPolicy());
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(2, 4, 1,
+                TimeUnit.MINUTES, new ArrayBlockingQueue<>(2), new customThreadFactory(), new customRejectionPolicy());
 
-        for(int i=0;i<5;i++){
-            executor.submit(()->{
+        for (int i = 0; i < 5; i++) {
+            executor.submit(() -> {
                 try {
                     Thread.sleep(5000);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-                System.out.println("task is processed by :"+Thread.currentThread().getName());
+                System.out.println("task is processed by :" + Thread.currentThread().getName());
             });
         }
 

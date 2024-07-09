@@ -5,17 +5,17 @@ import java.util.concurrent.TimeUnit;
 public class MainWithSevenTasks {
     public static void main(String[] args) {
 
-        ThreadPoolExecutor executor = new ThreadPoolExecutor(2,4,1,
-                TimeUnit.MINUTES,new ArrayBlockingQueue<>(2), new customThreadFactory(), new customRejectionPolicy());
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(2, 4, 1,
+                TimeUnit.MINUTES, new ArrayBlockingQueue<>(2), new customThreadFactory(), new customRejectionPolicy());
 
-        for(int i=0;i<7;i++){
-            executor.submit(()->{
+        for (int i = 0; i < 7; i++) {
+            executor.submit(() -> {
                 try {
                     Thread.sleep(5000);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-                System.out.println("task is processed by :"+Thread.currentThread().getName());
+                System.out.println("task is processed by :" + Thread.currentThread().getName());
             });
         }
 
