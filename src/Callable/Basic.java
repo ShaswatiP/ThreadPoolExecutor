@@ -15,12 +15,13 @@ public class Basic {
         // below calls submit(Runnable) : as nothing is returned - same as above, as 1 line is within Runnable.run(), braces are note needed.
         Future<?> futureObj2 = threadPoolExecutor.submit(()->System.out.println("something again"));
 
-        // below calls submit(Callable<T>) : as we are returning something
+        // below calls submit(Callable<T>) : as we are returning something - a return statement is there
         Future<?> futureObj3 = threadPoolExecutor.submit(()->{
             System.out.println("something again");
             return 45;
         });
 
+        // Callable task return Integer, here type of Future object is Integers
         Future<Integer> futureObj4 = threadPoolExecutor.submit(()->{
             System.out.println("something again");
             return 45;

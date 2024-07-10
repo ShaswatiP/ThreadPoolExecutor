@@ -10,7 +10,7 @@ public class CallableAndRunnableExample {
             ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(3 ,3, 1, TimeUnit.HOURS, new ArrayBlockingQueue<>(10),
                     Executors.defaultThreadFactory(), new ThreadPoolExecutor.AbortPolicy());
 
-            // below calls submit(Runnable) : as nothing is returned
+            // below calls submit(Runnable) : as nothing is returned - as we don't know what submit() will return, make type of FutureObject as Future<?>
             // ? is wildCard, it can be anything, so the return type is caught into 'object' of Object type, as Object is parent of all classes
             Future<?> futureObj1 = threadPoolExecutor.submit(()-> {
                 System.out.println("task 1 with runnable");
@@ -26,7 +26,7 @@ public class CallableAndRunnableExample {
             }
 
             List<Integer> al = new ArrayList<>();
-            // below calls : V submit(Runnable) with returnType
+            // below calls : V submit(Runnable) with returnType - here we want Future object to be of type List<Integer>
             Future<List<Integer>> futureObj2 = threadPoolExecutor.submit(()->{
                 al.add(455);
                 System.out.println("task 2 runnable with return object");
