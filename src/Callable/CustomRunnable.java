@@ -25,6 +25,7 @@ public class CustomRunnable {
         } catch (Exception e) {
             //
         }
+        threadPoolExecutor.shutdown();
     }
 }
 class myRunnable implements Runnable{

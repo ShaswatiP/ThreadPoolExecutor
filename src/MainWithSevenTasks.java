@@ -33,9 +33,9 @@ public class MainWithSevenTasks {
         *
         *
         * here corePoolSize = 2,  Queue size = 2 and maxPoolSize = 4
-            with 7 tasks and the queue limit and maxPoollimit is reached, here max 6 tasks can be submitted
+            with 7 tasks and the queue limit and maxPoolLimit is reached, here max 6 tasks can be submitted
             * hence 1 task is rejected at submit only.
-           *
+            *
            if we increase 'i' limit to 9 is for loop, that is if we want to submit 9 tasks,
            then 3 are rejected and 6 are processed.
            Output:
@@ -56,6 +56,22 @@ public class MainWithSevenTasks {
            *
            * /
          */
+        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(2,4,1,
+                TimeUnit.MINUTES,new ArrayBlockingQueue<>(2));
+        // put submit() inside for loop -> then only x number of tasks/requests are submitted.
+        // if for loop is inside submit(), then it means only 1 task is submitted to threadPoolExecutor that is running a for loop
+        for (int i = 0 ; i< 7;i++){
+            int ii = i;
+        threadPoolExecutor.submit(()->{
 
+                try {
+                    Thread.sleep(5000);
+                    System.out.println("task "+ii+" is processed");
+                }catch (Exception e){
+                    //
+                }
+            });
+        }
+        threadPoolExecutor.shutdown();
     }
 }

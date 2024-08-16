@@ -42,8 +42,8 @@ public class Main {
             task is processed by :Thread-0
         *
         *
-        * here corePoolSize = 2, so at one moment 2 threads are running,
-        *  when task3 and 4 comes in they are put in the Queue of size 2,
+        * here corePoolSize = 2, so at one time 2 threads are running,
+        * when task3 and 4 comes in they are put in the Queue of size 2,
         * once thread 1 is free it picks up task3 and thread 0 picks task 4
         */
     }

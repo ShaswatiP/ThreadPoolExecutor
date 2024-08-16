@@ -53,6 +53,7 @@ public class CallableAndRunnableExample {
             } catch (Exception e) {
                 //
             }
+            threadPoolExecutor.shutdown();
 
 
         }

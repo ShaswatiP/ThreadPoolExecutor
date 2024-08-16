@@ -12,6 +12,7 @@ public class thenApply {
         ThreadPoolExecutor poolExecutor = new ThreadPoolExecutor(1, 1, 1, TimeUnit.HOURS, new ArrayBlockingQueue<>(10),
                 Executors.defaultThreadFactory(), new ThreadPoolExecutor.AbortPolicy());
         learnThenApply(poolExecutor);
+        poolExecutor.shutdown();
 
     }
 
@@ -28,7 +29,7 @@ public class thenApply {
           */
 
 
-        // here the async task returns a string "first Nilu da" to another task, which concats with original string, 2nd task is done in thenApply()
+        // here the async task returns a string 'first Nilu Da' to another task, which concat with original string, 2nd task is done in thenApply()
         CompletableFuture<String> completableFuture = CompletableFuture.supplyAsync(() -> {
                             String first = "first Nilu da";
                             return first;

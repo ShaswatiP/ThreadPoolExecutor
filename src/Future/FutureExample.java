@@ -8,8 +8,8 @@ public class FutureExample {
         ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(1, 1, 1, TimeUnit.HOURS, new ArrayBlockingQueue<>(10),
                 Executors.defaultThreadFactory(), new ThreadPoolExecutor.AbortPolicy());
 
-        //new thread will be created and it will perform the, it's status stored in 'future'
-        java.util.concurrent.Future<?> future = threadPoolExecutor.submit(()->{
+        //new thread will be created and it will perform the task, it's status is stored in 'future'
+        Future<?> future = threadPoolExecutor.submit(()->{
             System.out.println("this is a new task executed by :"+Thread.currentThread().getName());
         });
 

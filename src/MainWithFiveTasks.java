@@ -8,13 +8,14 @@ public class MainWithFiveTasks {
                 TimeUnit.MINUTES, new ArrayBlockingQueue<>(2), new customThreadFactory(), new customRejectionPolicy());
 
         for (int i = 0; i < 5; i++) {
+            int ii = i;
             executor1.submit(() -> {
                 try {
                     Thread.sleep(5000);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-                System.out.println("task is processed by :" + Thread.currentThread().getName());
+                System.out.println("task "+ ii +" is processed by :" + Thread.currentThread().getName());
             });
         }
 
