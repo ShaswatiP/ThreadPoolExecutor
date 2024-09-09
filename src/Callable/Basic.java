@@ -29,10 +29,10 @@ public class Basic {
         });
 
         try {
-            System.out.println(futureObj1.get());
-            System.out.println(futureObj2.get());
-            System.out.println(futureObj3.get());
-            System.out.println(futureObj4.get());
+            System.out.println("futureObj1 :"+futureObj1.get());
+            System.out.println("futureObj2 :"+futureObj2.get());
+            System.out.println("futureObj3 :"+futureObj3.get());
+            System.out.println("futureObj4 :"+futureObj4.get());
         } catch (Exception e) {
             //
         }

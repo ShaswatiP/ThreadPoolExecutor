@@ -9,21 +9,23 @@ public class main {
                 Executors.defaultThreadFactory(), new ThreadPoolExecutor.AbortPolicy());
 
 
-        CompletableFuture<String> completableFuture = CompletableFuture.supplyAsync(()->{
+        CompletableFuture<String> cf1 = CompletableFuture.supplyAsync(()->{
             return "I am studying";
         },poolExecutor);
 
-        CompletableFuture<String> completableFuture1 = CompletableFuture.supplyAsync(()->{
+        CompletableFuture<String> cf2 = CompletableFuture.supplyAsync(()->{
             return " java thread pools";
         },poolExecutor);
 
-        CompletableFuture<String> combinedFuture = completableFuture.thenCombine(completableFuture1,(String s1,String s2) -> s1+s2);
+        // combine cf1 and cf2
+        CompletableFuture<String> combinedFuture = cf1.thenCombine(cf2,(String s1, String s2) -> s1+s2);
 
         try {
             System.out.println(combinedFuture.get());
         }  catch (Exception e) {
            //
         }
+        poolExecutor.shutdown();
 
     }
 }

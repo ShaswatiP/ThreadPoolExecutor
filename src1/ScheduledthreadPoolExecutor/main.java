@@ -11,5 +11,6 @@ public class main {
         },4, TimeUnit.SECONDS);
 
         System.out.println("main thread is completed");
+        scheduledThreadPool.shutdown();
     }
 }

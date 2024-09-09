@@ -1,6 +1,9 @@
 package CompletableFuture.thenApplyAndthenApplyAsync;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.*;
+import java.util.stream.Collectors;
 
 public class thenApplyAsync {
 
@@ -34,5 +37,28 @@ public class thenApplyAsync {
         *
         *
         * */
+
+        CompletableFuture<List<Integer>> completableFuture1 = CompletableFuture.supplyAsync(() -> {
+            List<Integer> al = new ArrayList<>();
+            for (int i = 0; i < 20; i++) {
+                if ((i & 1) != 0) {
+                    al.add(i);
+                }
+            }
+            return al;
+            // from the list, filter the ones divisible by 3
+        }, poolExecutor).thenApplyAsync((List<Integer> al) -> {
+            return al.stream().filter(ele -> ele % 3 == 0).collect(Collectors.toList());
+            // square each number in the list
+        }).thenApplyAsync((List<Integer> al) -> {
+            return al.stream().map(x -> x * x).collect(Collectors.toList());
+        });
+
+        try {
+            System.out.println(completableFuture1.get());
+        } catch (Exception e) {
+            //
+        }
+        poolExecutor.shutdown();
     }
 }

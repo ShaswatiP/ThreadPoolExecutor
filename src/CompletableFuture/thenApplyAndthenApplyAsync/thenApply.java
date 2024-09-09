@@ -7,14 +7,55 @@ import java.util.stream.Collectors;
 
 public class thenApply {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
 
         ThreadPoolExecutor poolExecutor = new ThreadPoolExecutor(1, 1, 1, TimeUnit.HOURS, new ArrayBlockingQueue<>(10),
                 Executors.defaultThreadFactory(), new ThreadPoolExecutor.AbortPolicy());
         learnThenApply(poolExecutor);
         poolExecutor.shutdown();
 
+        CompletableFuture<String> completableFutureOne = CompletableFuture.supplyAsync(()->{
+//            try {
+//                Thread.sleep(4000);
+                System.out.println(Thread.currentThread().getName()+" 1st");
+//            }catch (Exception e){
+//                //
+//            }
+            return "";
+        }).thenApply((String s) -> {
+            System.out.println("hello");
+            try {
+                Thread.sleep(4000);
+                System.out.println(Thread.currentThread().getName()+" 2nd");
+            }catch (Exception e){
+                //
+            }
+            return "";
+        }).thenApply((String x)->{
+            System.out.println(x+"hello hello");
+            return x+"hello hello";
+        });
+
+        completableFutureOne.join();
+        String string = completableFutureOne.get();
+
+        CompletableFuture<String> comp = CompletableFuture.supplyAsync(() -> {
+                    return "hey";
+                }).
+                thenApply((String x) -> {
+                    return x + "cat";
+                }).
+                thenApply((String x) -> {
+                    return x + "dog";
+                }).thenApply((String x) ->{
+                    return x+"blah";
+                });
+
+        comp.join();
+        System.out.println(comp.get());
+
     }
+
 
     private static void learnThenApply(ThreadPoolExecutor poolExecutor) {
 

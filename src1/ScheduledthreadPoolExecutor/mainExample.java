@@ -15,5 +15,6 @@ public class mainExample {
             //
         }
         System.out.println("main thread is completed");
+        scheduledThreadPool.shutdown();
     }
 }

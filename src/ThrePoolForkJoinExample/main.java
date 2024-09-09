@@ -50,8 +50,8 @@ class computeSumTask extends RecursiveTask<Integer>{
             right.fork(); // creates smaller sub-task that computes sum of (mid+1) to end
 
             // combine the results of the sub-tasks
-            Integer leftsum = left.join();
-            Integer rightsum = right.join();
+            int leftsum = left.join();
+            int rightsum = right.join();
             return leftsum+rightsum;
         }
     }

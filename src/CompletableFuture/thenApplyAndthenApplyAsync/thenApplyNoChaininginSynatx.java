@@ -11,6 +11,7 @@ public class thenApplyNoChaininginSynatx {
         ThreadPoolExecutor poolExecutor = new ThreadPoolExecutor(1, 1, 1, TimeUnit.HOURS, new ArrayBlockingQueue<>(10),
                 Executors.defaultThreadFactory(), new ThreadPoolExecutor.AbortPolicy());
         learnThenApplyNoChainingInSyntax(poolExecutor);
+        poolExecutor.shutdown();
 
     }
 

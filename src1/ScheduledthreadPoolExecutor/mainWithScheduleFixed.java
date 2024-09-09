@@ -23,6 +23,7 @@ public class mainWithScheduleFixed {
         } catch (Exception e) {
             //
         }
+        scheduledThreadPool.shutdown();
 
     }
 
