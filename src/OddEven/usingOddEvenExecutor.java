@@ -33,7 +33,7 @@ public class usingOddEvenExecutor {
         Runnable oddTask = () -> {
             for (int i = 1; i <= 19; i += 2) {
                 reentrantLock.lock();
-                while (!sharedVariable) {
+                while (!sharedVariable) { // if it is not oddTask turn, go into waiting state
                     try {
                         oddCondition.await();
                     } catch (InterruptedException e) {
@@ -42,7 +42,7 @@ public class usingOddEvenExecutor {
                 }
                 System.out.println("Odd: " + i);
                 sharedVariable = false; // Now it's even's turn
-                evenCondition.signal();
+                evenCondition.signal(); // oddTask is done, signal even task.
                 reentrantLock.unlock();
 
             }
@@ -53,14 +53,14 @@ public class usingOddEvenExecutor {
                 reentrantLock.lock();
                 while (sharedVariable) {
                     try {
-                        evenCondition.await();
+                        evenCondition.await(); // it's not even task turn, go into waiting state.
                     } catch (InterruptedException e) {
                         // Thread.currentThread().interrupt();
                     }
                 }
                 System.out.println("Even: " + i);
                 sharedVariable = true; // Now it's odd's turn
-                oddCondition.signal();
+                oddCondition.signal(); // even task is done, signal oddTask.
                 reentrantLock.unlock();
 
             }

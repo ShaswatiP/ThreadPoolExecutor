@@ -6,6 +6,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
+
+
 /*
 *
 *
@@ -16,7 +18,7 @@ Put the whole logic of the function inside lock, before unlocking, call signal()
 *
 *
 * */
-public class usingThread {
+public class usingThreadPoolExecutor {
     static boolean sharedVar = true;
     static ReentrantLock reentrantLock = new ReentrantLock();
     static Condition odd = reentrantLock.newCondition();
@@ -24,20 +26,10 @@ public class usingThread {
     static int x = 1;
 
     public static void main(String[] args) {
-//        for (int i = 0 ; i<20 ;i++) {
-//            Thread t1 = new Thread(() -> {
-//                printOdd();
-//            });
-//
-//            Thread t2 = new Thread(() -> {
-//                printEven();
-//            });
-//            t1.start();
-//            t2.start();
-//        }
 
-        ThreadPoolExecutor poolExecutor = new ThreadPoolExecutor(2,4,1000, TimeUnit.MILLISECONDS,new ArrayBlockingQueue<>(10));
-
+        ThreadPoolExecutor poolExecutor = new ThreadPoolExecutor(2,4,1000,
+                TimeUnit.MILLISECONDS,new ArrayBlockingQueue<>(10));
+        // can support upto 14 tasks only. more than 14 will give exception.
         for(int i = 0 ; i < 14 ; i++){
             poolExecutor.submit(()-> {
                 printOdd();

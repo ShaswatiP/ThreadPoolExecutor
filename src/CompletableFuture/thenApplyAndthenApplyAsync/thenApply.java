@@ -32,10 +32,10 @@ public class thenApply {
             }
             return "";
         }).thenApply((String x)->{
-            System.out.println(x+"hello hello");
+            System.out.println(Thread.currentThread().getName()+" "+x+"hello hello");
             return x+"hello hello";
         });
-
+        System.out.println(Thread.currentThread().getName()+" now");
         completableFutureOne.join();
         String string = completableFutureOne.get();
 
@@ -105,7 +105,7 @@ public class thenApply {
         });
 
         try {
-            System.out.println(completableFuture1.get());
+            System.out.println("here get the result :"+completableFuture1.get());
         } catch (Exception e) {
             //
         }
